@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/user";
+import catImg from '../Images/paw.png';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ const Login = () => {
       <header className="header greeting-page">
         <div>
           <div className="title">
+            <div className="cat-img">
+              <img src={catImg} alt="" />
+            </div>
             <h1>Cat Room</h1>
           </div>
         </div>
