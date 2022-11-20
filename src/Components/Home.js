@@ -1,37 +1,101 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/user";
-import { setMessages } from "../redux/messages";
+import { createChat, updateChat } from "../redux/chats";
+import { addFriend } from "../redux/friends";
 import { useSelector } from "react-redux";
 import catImg from '../Images/paw.png';
 import triangle from '../Images/triangle.png';
 import like from '../Images/like.svg';
 import send from '../Images/send.svg';
 import { useEffect, useState } from "react";
-import Messages from "./Messages";
-import prr from '../Images/prr.jpg';
-import mrJinks from '../Images/Mr. Jinks.jpg';
-import puss from '../Images/Puss.jpg';
+
+
 
 const Home = () => {
   const [divStyle, setDivStyle] = useState(null);
-  const [buttonImg, setButtonImg] = useState(like);
-  const [display, setDisplay] = useState([]);
-
+  const [sendButton, setSendButton] = useState(like);
+  const [currentChatId, setCurrentChatId] = useState(null);
+  const [currentChatData, setCurrentChatData] = useState(null);
+  const [dialogRan, setDialogRan] = useState([0, 0, 0]);
   const dispatch = useDispatch();
 
-  let user = useSelector((state) => state.user);
+  const this_user_key = 5214214;
 
-  let conversation = useSelector((state) => state.messages);
+  let user = useSelector(state => state.user.value);
+
+  let chats = useSelector(state => state.chats.value);
+
+  let cats = useSelector(state => state.cats.value);
+
+  let friends = useSelector(state => state.friends.value);
+
+  let fakeMsg = useSelector(state => state.fakeMsg.value);
 
   useEffect(() => {
-    setDisplay(conversation.value);
-  }, [conversation]);
+    let key = friends[friends.length - 1];
+    switch(key) {
+      case 2343243252:
+        if (!dialogRan[0]) {
+          startDialog(key);
+        }
+        break;
+
+      case 52352342:
+        if (!dialogRan[1]) {
+          startDialog(key);
+        }
+        break;
+
+      case 436324234:
+        if (!dialogRan[2]) {
+          startDialog(key);
+        }
+        break;
+    }
+  }, [friends])
+
+  useEffect(() => {
+    if (!currentChatId) return;
+
+    let tempChatData = chats.find(chat => chat.chat_id === currentChatId);
+    let tempFriend = tempChatData.members.find(member => member != this_user_key);
+    tempFriend = cats.find(cat => cat.key === tempFriend);
+    let tempAll = {friend: tempFriend, chat: tempChatData};
+    
+    setCurrentChatData(tempAll);
+  }, [currentChatId, chats]);
 
   useEffect(() => {
     const div = document.querySelector('.message-out');
-
+    
     div.scrollTop = div.scrollTopMax;
-  }, [display]);
+  }, [currentChatData]);
+
+  const startDialog = (key) => {
+    if (key === 2343243252) {
+        let temp = dialogRan;
+        temp[0] = 1;
+        setDialogRan(temp);
+        let id = chats.find(chat => chat.members.includes(key));
+        id = id.chat_id;
+        let text = fakeMsg[0].texts[0];
+        sendFakeMsg(id, text, 'Mr. Jinks');
+    } else if (key === 52352342) {
+      let temp = dialogRan;
+      temp[1] = 1;
+      setDialogRan(temp);
+
+    } else if (key === 436324234) {
+      let temp = dialogRan;
+      temp[2] = 1;
+      setDialogRan(temp);
+
+    }
+  };
+
+  const sendFakeMsg = (id, text, name) => {
+    dispatch(updateChat({chat_id: id, message: {text: text, time: new Date().getTime(), name: name}}));
+  };
 
   const handleClick = () => {
     const div = document.querySelector('.drop-down-menu>div');
@@ -52,12 +116,12 @@ const Home = () => {
 
   const handleSliding = () => {
     const slidingBar = document.querySelector('.sliding-bar');
-    const friends = document.querySelector('.friends');
-    const button = document.querySelector('.slide-button>img');
+    const friends = document.querySelector('.friends>div');
+    const button = document.querySelector('.slide-button>button>img');
     
     if (!slidingBar.style.width) {
       slidingBar.style.width = '200px';
-      button.style.transform = 'translateX(-5px)';
+      button.style.transform = 'translateX(-3px)';
       button.style.rotate = '-180deg';
       friends.style.opacity = 1;
     } else {
@@ -71,10 +135,15 @@ const Home = () => {
   const handleInput = (e) => {
     const textContainer = document.querySelector('.message-in');
 
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      handleSend();
+    };
+
     if (!e.target.value) {
-      setButtonImg(like);
+      setSendButton(like);
     } else {
-      setButtonImg(send);
+      setSendButton(send);
     };
 
     e.target.style.height = '0px';
@@ -89,25 +158,25 @@ const Home = () => {
   };
 
   const handleSend = () => {
+    if (!currentChatId) return;
+
     const text = document.querySelector('.message-text-container>textarea');
     const textContainer = document.querySelector('.message-in');
 
     if (text.value) {
-      dispatch(setMessages({text: text.value, time: new Date().getTime(), type: 'sent'}));
+      dispatch(updateChat({chat_id: currentChatId, message: {text: text.value, time: new Date().getTime(), name: user.name}}));
       text.value = null;
       text.style.height = 0;
       text.style.height = text.scrollHeight + 'px';
       textContainer.style.height = 41 + text.scrollHeight + 'px';
-      setButtonImg(like);
+      setSendButton(like);
     } else {
-      dispatch(setMessages({text: ':like:', time: new Date().getTime(), type: 'sent'}));
+      dispatch(updateChat({chat_id: currentChatId, message: {text: ':like:', time: new Date().getTime(), name: user.name}}));
     }
   };
 
   const handleHover = (e) => {
-    let temp = conversation.value;
-    temp = temp.find(message => e.target.slot == message.time);
-    let date = new Date(temp.time).toDateString();
+    let date = new Date(e.target.slot).toDateString();
   };
 
   const showCats = () => {
@@ -118,6 +187,33 @@ const Home = () => {
     } else {
       cats.style.height = '';
     };
+  };
+
+  const handleAddFriend = (e) => {
+    let element = e.target;
+    if (element.tagName === 'BUTTON') {
+      let key = Number(element.attributes.user_key.value);
+      if (friends.includes(key)) {
+        return
+      } else {
+        dispatch(addFriend(key));
+        dispatch(createChat([key, this_user_key]));
+      }
+    } else {
+      e.target = e.target.parentElement;
+      handleAddFriend(e);
+    }
+  };
+
+  const handleOpenChat = (e) => {
+    let element = e.target;
+    if (element.tagName === 'BUTTON') {
+      let id = element.attributes.chat_id.value
+      setCurrentChatId(id);
+    } else {
+      e.target = e.target.parentElement;
+      handleOpenChat(e);
+    }
   };
 
   return (
@@ -133,13 +229,13 @@ const Home = () => {
           <div className="drop-down-container">
             <div className="drop-down-button-container">
               <button className="user drop-down-button" onClick={handleClick}>
-                <img src={user.value.avatar} alt=""/>
+                <img src={user.avatar} alt=""/>
               </button>
             </div>
             <div className="user drop-down-menu" style={divStyle}>
               <div>
-                <img src={user.value.avatar} alt=""/>
-                <h3>{user.value.name}</h3>
+                <img src={user.avatar} alt=""/>
+                <h3>{user.name}</h3>
                 <button onClick={() => dispatch(logout())}>Log Out</button>
               </div>
             </div>
@@ -156,33 +252,20 @@ const Home = () => {
             </div>
           </button>
           <div className="search-for-friends">
-            <button>
-              <div>
-                <div>
-                  <div className="img-holder"><img src={mrJinks} alt="" /></div>
-                  <p>Mr. Jinks</p>
-                  <p className="plus">+</p>
-                </div>
-              </div>
-            </button>
-            <button>
-              <div>
-                <div>
-                  <div className="img-holder"><img src={puss} alt="" /></div>
-                  <p>Puss</p>
-                  <p className="plus">+</p>
-                </div>
-              </div>
-            </button>
-            <button>
-              <div>
-                <div>
-                  <div className="img-holder"><img src={prr} alt="" /></div>
-                  <p>prr</p>
-                  <p className="plus">+</p>
-                </div>
-              </div>
-            </button>
+            {cats && cats.map(cat => {
+              return (
+                <button key={cat.key} user_key={cat.key} onClick={e => handleAddFriend(e)}>
+                  <div>
+                    <div>
+                      <div className="img-holder">
+                        <img src={cat.avatar} alt="" />
+                      </div>
+                      <p>{cat.name}</p>
+                    </div>
+                  </div>
+                </button>
+              )
+            })}
           </div>
           <button>
             <div>
@@ -201,26 +284,60 @@ const Home = () => {
         </div>
         <div className="chat-window-container">
           <div className="sliding-bar">
-            <button className="slide-button" onClick={handleSliding}><img src={triangle} alt="" /></button>
+            <div className="slide-box">
+              <div className="slide-button">
+                <button onClick={handleSliding}><img src={triangle} alt="" /></button>
+              </div>
+            </div>
             <div className="friends">
+              <div>
+                {chats && chats.map(chat => {
+                  let friend = chat.members.find(member => {
+                    return member != this_user_key;
+                  });
+                  friend = cats.find(cat => {
+                    return cat.key == friend;
+                  });
+                  return (
+                    <button key={chat.chat_id} chat_id={chat.chat_id} onClick={handleOpenChat}>
+                      <div>
+                        <img src={friend.avatar} alt="" />
+                      </div>
+                      <p>{friend.name}</p>
+                    </button>
+                  )
+                })}
+              </div>
             </div>
           </div>
           <div className="chat-window">
+            <div className="current-friend">
+              {currentChatData && (
+                <div>
+                  <div>
+                    <img src={currentChatData.friend.avatar} alt="" />
+                  </div>
+                  <p>{currentChatData.friend.name}</p>
+                </div>
+              )}
+            </div>
             <div className="message-out">
               <div>
-                {display != [] && display.map(message => {
-                  if (message.text === ':like:') {
-                    return (
-                      <div slot={message.time} className="sent message like" key={message.time} onMouseEnter={e => handleHover(e)}>
-                        <img slot={message.time} className="purple" src={like} alt="" />
-                      </div>
-                    )
-                  } else if (message.type === 'sent') {
-                    return (
-                      <div slot={message.time} className="sent message" key={message.time} onMouseEnter={e => handleHover(e)}>
-                        <p slot={message.time}>{message.text}</p>
-                      </div>
-                    )
+                {currentChatData && currentChatData.chat.messages.map(message => {
+                  if (message.name === user.name) {
+                    if (message.text === ':like:') {
+                      return (
+                        <div slot={message.time} className="sent message like" key={message.time} onMouseEnter={e => handleHover(e)}>
+                          <img slot={message.time} className="purple" src={like} alt="" />
+                        </div>
+                      )
+                    } else {
+                      return (
+                        <div slot={message.time} className="sent message" key={message.time} onMouseEnter={e => handleHover(e)}>
+                          <p slot={message.time}>{message.text}</p>
+                        </div>
+                      )
+                    }
                   } else {
                     return (
                       <div slot={message.time} className="recieved message" key={message.time} onMouseEnter={e => handleHover(e)}>
@@ -233,10 +350,10 @@ const Home = () => {
             </div>
             <div className="message-in">
               <div className="message-text-container">
-                <textarea onInput={handleInput}></textarea>
+                <textarea onKeyDown={handleInput}></textarea>
               </div>
               <div className="message-button-container">
-                <button onMouseDown={handleSend}><img className="purple" src={buttonImg} alt=""/></button>
+                <button onMouseDown={handleSend}><img className="purple" src={sendButton} alt=""/></button>
               </div>
             </div>
           </div>
