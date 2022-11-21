@@ -23,16 +23,16 @@ h1::selection, h3::selection, img::selection {
   display: none;
 }
 
-.background {
+.App {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background-color: rgb(18, 18, 18);
+  background-color: rgb(16, 16, 16);
 }
 
 .header {
   width: 100%;
-  background-color: rgb(18, 18, 18);
+  background-color: rgb(16, 16, 16);
   box-shadow: 0px 50px 200px 100px #ce00e5;
   height: 65px;
 }
@@ -45,6 +45,7 @@ h1::selection, h3::selection, img::selection {
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0px 20px 0px 20px;
 }
 
@@ -96,10 +97,32 @@ h1::selection, h3::selection, img::selection {
 }
 
 #signInDiv {
-  align-self: center;
+  padding-left: 10vw;
 }
 
 /* Home Component */
+
+.friends .img-holder {
+  width: 35px;
+  height: 35px;
+}
+
+.friends .user-item {
+  padding: 5px 10px;
+  width: 100%;
+  border-bottom: 2px solid rgb(22, 22, 22);
+}
+
+.friends .user-item:hover {
+  background-color: rgb(22, 22, 22);
+}
+
+.friends .user-item-inside {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 .drop-down-container {
   width: 150px;
@@ -120,7 +143,7 @@ h1::selection, h3::selection, img::selection {
   padding: 5px;
   border: none;
   border-radius: 50px;
-  background-color: rgb(18, 18, 18);
+  background-color: rgb(22, 22, 22);
   cursor: pointer;
 }
 
@@ -185,7 +208,7 @@ h1::selection, h3::selection, img::selection {
   grid-column: 1 / 2;
   background-color: rgb(8, 8, 8);
   border-radius: 30px 0px 0px 30px;
-  border-right: 2px solid rgba(35, 35, 35, 0.474);
+  border-right: 2px solid rgb(22, 22, 22);
   outline: 2px solid rgb(206, 0, 229);
   overflow: hidden;
   align-self: center;
@@ -201,36 +224,14 @@ h1::selection, h3::selection, img::selection {
   transition: opacity 0.5s;
 }
 
-.friends>div>button:hover {
+.friends button:hover {
   cursor: pointer;
-  background-color: rgba(35, 35, 35, 0.474);
-}
-
-.friends>div>button {
-  border: none;
-  border-bottom: 2px solid rgba(35, 35, 35, 0.474);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: none;
-  padding: 10px;
-}
-
-.friends>div>button>div {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-}
-
-.friends img {
-  width: 100%;
+  background-color: rgb(22, 22, 22);
 }
 
 .slide-box {
   height: 42px;
-  border-bottom: 2px solid rgba(35, 35, 35, 0.474);
+  border-bottom: 2px solid rgb(22, 22, 22);
 }
 
 .slide-button {
@@ -249,8 +250,8 @@ h1::selection, h3::selection, img::selection {
   border: none;
   width: 100%;
   height: 100%;
-  background-color: rgb(18, 18, 18);
-  border-color: rgba(35, 35, 35, 0.474);
+  background-color: rgb(22, 22, 22);
+  border-color: rgb(22, 22, 22);
   border-width: 2px;
   border-style: none solid none none;
   border-radius: 30px 0px 0px 0px;
@@ -279,7 +280,7 @@ h1::selection, h3::selection, img::selection {
 
 .current-friend {
   height: 51px;
-  border-bottom: 2px solid rgba(35, 35, 35, 0.474);
+  border-bottom: 2px solid rgb(22, 22, 22);
 }
 
 .current-friend>div {
@@ -324,9 +325,10 @@ h1::selection, h3::selection, img::selection {
 
 .message.sent {
   align-self: flex-end;
-  background-color: rgba(35, 35, 35, 0.474);
+  background-color: rgb(22, 22, 22);
   border-radius: 20px;
 }
+
 .message.sent>p {
   padding: 10px;
   font-size: 1rem;
@@ -345,14 +347,14 @@ h1::selection, h3::selection, img::selection {
 .message-in {
   display: flex;
   align-items: center;
-  border-top: 2px solid rgba(35, 35, 35, 0.474);
+  border-top: 2px solid rgb(22, 22, 22);
   height: 60px;
 }
 
 .message-text-container {
   width: 85%;
   height: 100%;
-  border-right: 2px solid rgba(35, 35, 35, 0.474);
+  border-right: 2px solid rgb(22, 22, 22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -412,6 +414,16 @@ h1::selection, h3::selection, img::selection {
   transition: all 0.5s;
 }
 
+.sidebar .user-item-inside {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  gap: 10px;
+  background-color: rgb(8, 8, 8);
+}
+
 .sidebar>button, .sidebar>div>button {
   height: 65px;
   width: 100%;
@@ -421,7 +433,7 @@ h1::selection, h3::selection, img::selection {
   cursor: pointer;
 }
 
-.sidebar>button>div, .sidebar>div>button>div {
+.sidebar>button>div, .sidebar .user-item {
   height: 100%;
   display: flex;
   align-items: flex-start;
@@ -429,7 +441,7 @@ h1::selection, h3::selection, img::selection {
   transition: background-color 0.3s;
 }
 
-.sidebar>button>div:hover, .sidebar>div>button>div:hover {
+.sidebar>button>div:hover, .sidebar .user-item:hover {
   background-color: rgba(8, 8, 8, 0);
 }
 
@@ -452,16 +464,6 @@ h1::selection, h3::selection, img::selection {
 
 .img-holder>img {
   width: 100%;
-}
-
-.search-for-friends>button>div>div {
-  width: 100%;
-  height: 90%;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  gap: 10px;
-  background-color: rgb(8, 8, 8);
 }
 
 .plus {
