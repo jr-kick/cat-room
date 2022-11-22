@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import triangle from '../Images/triangle.png';
 import like from '../Images/like.svg';
 import send from '../Images/send.svg';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 
@@ -15,6 +15,7 @@ const Home = () => {
   const [dialogRan, setDialogRan] = useState([0, 0, 0]);
   const [sendButton, setSendButton] = useState(like);
   const [chat, setChat] = useState(null);
+  const chatRef = useRef(chat);
   const [friend, setFriend] = useState(null);
   const dispatch = useDispatch();
   const {id} = useParams();
@@ -35,10 +36,11 @@ const Home = () => {
     if (id == false) {
       return
     } else {
-      let tempChat = chats.find(chat => chat.chat_id === id);
+      let tempChat = chats.find(chat => chat.chat_id == id);
       let tempFriend = tempChat.members.find(member => member != this_user_key);
       tempFriend = cats.find(cat => cat.key === tempFriend);
       setChat(tempChat);
+      chatRef.current = tempChat;
       setFriend(tempFriend);
     }
   }, [chats, id]);
@@ -73,26 +75,91 @@ const Home = () => {
   }, [friends])
 
   const startDialog = (key) => {
+    const sendButton = document.querySelector('.message-button-container>button');
     if (key === 2343243252) {
-      setTimeout(() => {
         let temp = dialogRan;
         temp[0] = 1;
         setDialogRan(temp);
+      setTimeout(() => {
         let id = chats.find(chat => chat.members.includes(key));
         id = id.chat_id;
         let text = fakeMsg[0].texts[0];
         sendFakeMsg(id, text, 'Mr. Jinks');
+        setTimeout(() => {
+          text = fakeMsg[0].texts[1];
+          sendFakeMsg(id, text, 'Mr. Jinks');
+          
+          function continueDialog() {
+            if (chatRef.current.members.some(member => member == 2343243252))  {
+              sendButton.removeEventListener('click', continueDialog);
+              setTimeout(() => {
+                text = fakeMsg[0].texts[2];
+                sendFakeMsg(id, text, 'Mr. Jinks');
+                setTimeout(() => {
+                  text = fakeMsg[0].texts[3];
+                  sendFakeMsg(id, text, 'Mr. Jinks');
+                  setTimeout(() => {
+                    text = fakeMsg[0].texts[4];
+                    sendFakeMsg(id, text, 'Mr. Jinks');
+                    text = fakeMsg[0].texts[5];
+                    function respond() {
+                      if (chatRef.current.members.some(member => member == 2343243252)) {
+                        setTimeout(() => {
+                            sendFakeMsg(id, text, 'Mr. Jinks');
+                          
+                        }, 1000);
+                      };
+                    };
+                    sendButton.addEventListener('click', respond);
+                    window.addEventListener('keydown', e => {
+                      if (e.code === 'Enter') {
+                        respond();
+                      }
+                    });
+                  }, 1000);
+                }, 1000);
+              }, 1000);
+            }
+          };
+          sendButton.addEventListener('click', continueDialog);
+          window.addEventListener('keydown', e => {
+            if (e.code === 'Enter') {
+              continueDialog();
+            }
+          });
+        }, 1000)
       }, 2000)
     } else if (key === 52352342) {
       let temp = dialogRan;
       temp[1] = 1;
       setDialogRan(temp);
+      setTimeout(() => {
+        let id = chats.find(chat => chat.members.includes(key));
+        id = id.chat_id;
+        let text = fakeMsg[1].text;
+        sendFakeMsg(id, text, 'Puss');
+      }, 2000);
 
     } else if (key === 436324234) {
       let temp = dialogRan;
       temp[2] = 1;
       setDialogRan(temp);
-
+      function respond() {
+        if (chatRef.current.members.some(member => member == 436324234)) {
+          setTimeout(() => {
+            let id = chats.find(chat => chat.members.includes(key));
+            id = id.chat_id;
+            let text = fakeMsg[2].text;
+            sendFakeMsg(id, text, 'prr');
+          }, 2000);
+        }
+      }
+      sendButton.addEventListener('click', respond);
+      window.addEventListener('keydown', e => {
+        if (e.code === 'Enter') {
+          respond();
+        }
+      });
     }
   };
 
@@ -153,21 +220,46 @@ const Home = () => {
       text.value = null;
       text.style.height = 0;
       text.style.height = text.scrollHeight + 'px';
-      textContainer.style.height = 41 + text.scrollHeight + 'px';
+      textContainer.style.height = 50 + text.scrollHeight + 'px';
       setSendButton(like);
     } else {
-      dispatch(updateChat({chat_id: chat.chat_id, message: {text: ':like:', time: new Date().getTime(), name: user.name}, key: this_user_key}));
+      dispatch(updateChat({chat_id: chat.chat_id, message: {text: ':like:', time: new Date().getTime(), name: user.name, key: this_user_key}}));
     }
   };
 
   const handleHover = (e) => {
-    let date = new Date(e.target.slot).toDateString();
+    let father = climbToTop(e.target);
+    let date = new Date(Number(father.attributes.msg_key.value));
+    let name = father.attributes.name.value;
+    if (name == user.name) {
+      name = 'me'
+    }
+    let pre = Array.from(father.children).find(child => child.classList.contains('time'));
+    
+    pre.textContent = date.toLocaleDateString('default', {month: 'short'}) + ' ' + date.getDay() + ' - ' + date.getHours() + ':' + date.getMinutes() + '\nby ' + name;
+    pre.style.opacity = 1;
+  };
+
+  const handleLeave = (e) => {
+    let father = climbToTop(e.target);
+    let pre = Array.from(father.children).find(child => child.classList.contains('time'));
+    pre.textContent = null;
+    pre.style.opacity = 0;
+  };
+
+  const climbToTop = (element) => {
+    if (element.classList.contains('top')) {
+      return element;
+    } else {
+      element = element.parentElement;
+      return climbToTop(element);
+    }
   };
 
   const handleInput = (e) => {
     const textContainer = document.querySelector('.message-in');
 
-    if (e.keyCode === 13) {
+    if (e.code === 'Enter') {
       e.preventDefault();
       handleSend();
     };
@@ -182,10 +274,10 @@ const Home = () => {
 
     if (e.target.scrollHeight < 57) {
       e.target.style.height = e.target.scrollHeight + 'px';
-      textContainer.style.height = 41 + e.target.scrollHeight + 'px';
+      textContainer.style.height = 50 + e.target.scrollHeight + 'px';
     } else {
       e.target.style.height = '57px';
-      textContainer.style.height = 41 + 57 + 'px';
+      textContainer.style.height = 50 + 57 + 'px';
     }
   };
 
@@ -277,21 +369,30 @@ const Home = () => {
                 if (message.key === this_user_key) {
                   if (message.text === ':like:') {
                     return (
-                      <div slot={message.time} className="sent message like" key={message.time} onMouseEnter={e => handleHover(e)}>
-                        <img slot={message.time} className="purple" src={like} alt="" />
+                      <div className="sent top" name={message.name} msg_key={message.time} key={message.time} onMouseEnter={e => handleHover(e)} onMouseLeave={e => handleLeave(e)}>
+                        <pre className="time"></pre>
+                        <div className="message like">
+                          <img className="purple" src={like} alt="" />
+                        </div>
                       </div>
                     )
                   } else {
                     return (
-                      <div slot={message.time} className="sent message" key={message.time} onMouseEnter={e => handleHover(e)}>
-                        <p slot={message.time}>{message.text}</p>
+                      <div className="sent top" name={message.name} msg_key={message.time} key={message.time} onMouseEnter={e => handleHover(e)} onMouseLeave={e => handleLeave(e)}>
+                        <pre className="time"></pre>
+                        <div className="message">
+                          <p>{message.text}</p>
+                        </div>
                       </div>
                     )
                   }
                 } else {
                   return (
-                    <div slot={message.time} className="recieved message" key={message.time} onMouseEnter={e => handleHover(e)}>
-                      <p slot={message.time}>{message.text}</p>
+                    <div className="recieved top" name={message.name} msg_key={message.time} key={message.time} onMouseEnter={e => handleHover(e)} onMouseLeave={e => handleLeave(e)}>
+                      <div className="message">
+                        <p>{message.text}</p>
+                      </div>
+                      <pre className="time"></pre>
                     </div>
                   )
                 }
@@ -300,7 +401,7 @@ const Home = () => {
           </div>
           <div className="message-in">
             <div className="message-text-container">
-              <textarea onKeyDown={handleInput}></textarea>
+              <textarea onInput={handleInput}></textarea>
             </div>
             <div className="message-button-container">
               <button onMouseDown={handleSend}><img className="purple" src={sendButton} alt=""/></button>

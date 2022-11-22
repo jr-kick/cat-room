@@ -1,8 +1,13 @@
 /* General */
 
 @font-face {
-  font-family: party;
-  src: url('./fonts/SparkyStonesRegular-BW6ld.ttf');
+  font-family: fredoka;
+  src: url('./fonts/FredokaOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: assistant;
+  src: url('./fonts/Assistant-VariableFont_wght.ttf');
 }
 
 * {
@@ -13,6 +18,10 @@
 
 h1, h3 {
   cursor: default;
+}
+
+h1, h3, p {
+  font-family: assistant;
 }
 
 h1::selection, h3::selection, img::selection {
@@ -41,6 +50,10 @@ h1::selection, h3::selection, img::selection {
   flex: 1 0 auto;
 }
 
+a {
+  text-decoration: none;
+}
+
 .header>div {
   height: 100%;
   display: flex;
@@ -57,9 +70,9 @@ h1::selection, h3::selection, img::selection {
 }
 
 .title>h1 {
-  font-family: party;
+  font-family: fredoka;
   font-weight: 1;
-  font-size: 60px;
+  font-size: 50px;
 }
 
 .cat-img {
@@ -77,7 +90,7 @@ h1::selection, h3::selection, img::selection {
 /* Login Component */
 
 .greeting-text {
-  padding: 100px 0vw 0px 10vw;
+  margin: 100px 0vw 0px 10vw;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -97,6 +110,7 @@ h1::selection, h3::selection, img::selection {
 }
 
 #signInDiv {
+  margin-top: 50px;
   padding-left: 10vw;
 }
 
@@ -264,9 +278,8 @@ h1::selection, h3::selection, img::selection {
 }
 
 .chat-window {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-rows: 42px auto max-content;
   width: 100%;
   height: 70vh;
   background-color: rgb(8, 8, 8);
@@ -279,8 +292,9 @@ h1::selection, h3::selection, img::selection {
 }
 
 .current-friend {
-  height: 51px;
+  height: 42px;
   border-bottom: 2px solid rgb(22, 22, 22);
+  grid-row: 1 / 2;
 }
 
 .current-friend>div {
@@ -304,10 +318,9 @@ h1::selection, h3::selection, img::selection {
 }
 
 .message-out {
-  height: 100%;
   overflow-y: scroll;
-  scrollbar-width: 0px;
   padding: 10px;
+  grid-row: 2 / 3;
 }
 
 .message-out>div {
@@ -316,39 +329,53 @@ h1::selection, h3::selection, img::selection {
   flex-direction: column;
   justify-content: flex-end;
   gap: 10px;
-  overflow-wrap: break-word;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top.sent {
+  justify-content: flex-end;
+}
+
+.top.recieved {
+  justify-self: flex-start;
 }
 
 .message {
   max-width: 60%;
-}
-
-.message.sent {
-  align-self: flex-end;
   background-color: rgb(22, 22, 22);
   border-radius: 20px;
+  border: 2px solid #ce00e5;
+  overflow-wrap: break-word;
 }
 
-.message.sent>p {
+.message>p {
   padding: 10px;
   font-size: 1rem;
 }
 
-.message.sent.like {
+.message.like {
   height: 25px;
   width: 25px;
   padding: 10px;
 }
 
-.message.recieved {
-  align-self: flex-start;
+.time {
+  opacity: 0;
+  text-align: center;
 }
 
 .message-in {
   display: flex;
+  height: 69px;
   align-items: center;
   border-top: 2px solid rgb(22, 22, 22);
-  height: 60px;
+  grid-row: 3 / 4;
 }
 
 .message-text-container {
