@@ -10,6 +10,302 @@
   src: url('./fonts/Assistant-VariableFont_wght.ttf');
 }
 
+@media (max-width: 610px) {
+
+  .drop-down-container {
+    display: none;
+  }
+
+  .header {
+    width: 100%;
+    background-color: rgb(16, 16, 16);
+    height: 15vh;
+  }
+  .sliding-bar {
+    display: none;
+  }
+
+  .button_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button_container>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    transition: none;
+  }
+
+  .first_layer {
+    border: none;
+    height: 50px;
+    background: none;
+    background-color: rgb(8, 8, 8);
+  }
+
+  .second_layer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+
+  .fading_line {
+    display: none;
+  }
+
+  .user_div {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .user_div>div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .sidebar p {
+    font-size: 25px;
+  }
+
+  .sidebar {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 85vh;
+    background-color: rgb(8, 8, 8);
+  }
+
+  .content.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 auto;
+  }
+  
+  .chat-window-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chat-window {
+    display: grid;
+    grid-template-rows: 42px auto max-content;
+    width: 100%;
+    height: 85vh;
+    background-color: rgb(8, 8, 8);
+    align-self: center;
+    overflow: hidden;
+  }
+
+  .title>h1 {
+    display: none;
+  }
+}
+
+@media (min-width: 611px) and (max-width: 1049px) {
+
+  .header {
+    width: 100%;
+    background-color: rgb(16, 16, 16);
+    box-shadow: 0px 50px 200px 100px #ce00e5;
+    height: 65px;
+  }
+  .button_container {
+    background-color: rgb(8, 8, 8);
+    width: 190px;
+    text-align: center;
+  }
+
+  .button_container>div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    z-index: 1;
+  }
+
+  .first_layer {
+    border: none;
+    height: 65px;
+    background: none;
+    background-color: rgb(8, 8, 8);
+  }
+
+  .second_layer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 65px;
+  }
+
+  .fading_line {
+    display: none;
+  }
+
+  .user_div {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .user_div>div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .sidebar p {
+    font-size: 25px;
+  }
+
+  .sidebar {
+    display: flex;
+    width: 100%;
+    background-color: rgb(8, 8, 8);
+    justify-content: space-evenly;
+  }
+
+  .content.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .chat-window-container {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    flex: 1 0 auto;
+  }
+
+  .chat-window {
+    display: grid;
+    grid-template-rows: 42px auto max-content;
+    width: 400px;
+    height: 70vh;
+    background-color: rgb(8, 8, 8);
+    border-radius: 0px 30px 30px 0px;
+    border: 2px solid rgb(206, 0, 229);
+    border-left: none;
+    grid-column: 2 / 3;
+    align-self: center;
+    overflow: hidden;
+  }
+
+  .title>h1 {
+    display: block;
+  }
+}
+
+@media (min-width: 1050px) {
+  .button_container {
+    width: 100%;
+  }
+
+  .header {
+    width: 100%;
+    background-color: rgb(16, 16, 16);
+    box-shadow: 0px 50px 200px 100px #ce00e5;
+    height: 65px;
+  }
+
+  .first_layer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: linear-gradient(90deg, rgb(8, 8, 8), rgb(206, 0, 229) 50%, rgb(8, 8, 8));
+    border: none;
+    height: 65px;
+  }
+
+  .second_layer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(8, 8, 8);
+    height: 90%;
+  }
+
+  .fading_line {
+    background-color: rgb(8, 8, 8);
+    height: 10%;
+    transition: opacity 0.3s;
+  }
+
+  .first_layer:hover {
+    cursor: pointer;
+  }
+
+  .first_layer:hover>.fading_line {
+    opacity: 0;
+  }
+
+  .user_div {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .user_div>div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .sidebar p {
+    font-size: 25px;
+  }
+
+  .sidebar {
+    width: 300px;
+    grid-column: 1 / 2;
+    padding-top: 20px;
+    background-color: rgb(8, 8, 8);
+  }
+
+  .content.home {
+    display: grid;
+    grid-template-columns: 1fr minmax(700px, 1fr) 1fr;
+  }
+  
+  .chat-window-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-column: 2 / 3;
+  }
+
+  .chat-window {
+    display: grid;
+    grid-template-rows: 42px auto max-content;
+    width: 100%;
+    height: 70vh;
+    background-color: rgb(8, 8, 8);
+    border-radius: 0px 30px 30px 0px;
+    border: 2px solid rgb(206, 0, 229);
+    border-left: none;
+    grid-column: 2 / 3;
+    align-self: center;
+    overflow: hidden;
+  }
+  
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -28,6 +324,11 @@ h1::selection, h3::selection, img::selection {
   background: none;
 }
 
+img {
+  width: 100%;
+  height: 100%;
+}
+
 #g_a11y_announcement {
   display: none;
 }
@@ -37,13 +338,6 @@ h1::selection, h3::selection, img::selection {
   display: flex;
   flex-direction: column;
   background-color: rgb(16, 16, 16);
-}
-
-.header {
-  width: 100%;
-  background-color: rgb(16, 16, 16);
-  box-shadow: 0px 50px 200px 100px #ce00e5;
-  height: 65px;
 }
 
 .content {
@@ -205,17 +499,6 @@ a {
   justify-content: space-between;
 }
 
-.content.home {
-  display: grid;
-  grid-template-columns: 1fr minmax(700px, 1fr) 1fr;
-}
-
-.chat-window-container {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-column: 2 / 3;
-}
-
 .sliding-bar {
   width: 40px;
   height: 70vh;
@@ -254,41 +537,22 @@ a {
   align-items: center;
   height: 100%;
   width: 42px;
-}
-
-.slide-button>button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  width: 100%;
-  height: 100%;
   background-color: rgb(22, 22, 22);
-  border-color: rgb(22, 22, 22);
-  border-width: 2px;
-  border-style: none solid none none;
-  border-radius: 30px 0px 0px 0px;
+  border: none;
   cursor: pointer;
 }
 
-.slide-button>button>img {
-  width: 40%;
-  transition: all 0.5s;
+.slide-button>div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 30px 0px 0px 0px;
 }
 
-.chat-window {
-  display: grid;
-  grid-template-rows: 42px auto max-content;
-  width: 100%;
-  height: 70vh;
-  background-color: rgb(8, 8, 8);
-  border-radius: 0px 30px 30px 0px;
-  border: 2px solid rgb(206, 0, 229);
-  border-left: none;
-  grid-column: 2 / 3;
-  align-self: center;
-  overflow: hidden;
+.slide-button>div>img {
+  transition: all 0.5s;
 }
 
 .current-friend {
@@ -428,57 +692,10 @@ a {
   background-color: rgb(42, 42, 42);
 }
 
-.sidebar {
-  width: 300px;
-  background-color: rgb(8, 8, 8);
-  grid-column: 1 / 2;
-  padding-top: 20px;
-}
-
 .search-for-friends {
   height: 0px;
   overflow: hidden;
-  transition: all 0.5s;
-}
-
-.sidebar .user-item-inside {
-  width: 100%;
-  height: 90%;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  gap: 10px;
-  background-color: rgb(8, 8, 8);
-}
-
-.sidebar>button, .sidebar>div>button {
-  height: 65px;
-  width: 100%;
-  font-size: 25px;
-  border: none;
-  background: linear-gradient(90deg, rgb(8, 8, 8), #ce00e5, rgb(8, 8, 8) 100%);
-  cursor: pointer;
-}
-
-.sidebar>button>div, .sidebar .user-item {
-  height: 100%;
-  display: flex;
-  align-items: flex-start;
-  background-color: rgb(8, 8, 8);
-  transition: background-color 0.3s;
-}
-
-.sidebar>button>div:hover, .sidebar .user-item:hover {
-  background-color: rgba(8, 8, 8, 0);
-}
-
-.sidebar>button>div>div {
-  width: 100%;
-  height: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(8, 8, 8);
+  transition: height 0.5s;
 }
 
 .img-holder {

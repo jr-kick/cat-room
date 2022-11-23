@@ -29,6 +29,19 @@ function App() {
     }
   };
 
+  const handleClick_2 = () => {
+    const sidebar = document.querySelector('.sidebar');
+    const chat = document.querySelector('.chat-window-container');
+    
+    if (sidebar.style.display == '') {
+      sidebar.style.display = 'block';
+      chat.style.display = 'none';
+    } else {
+      sidebar.style.display = '';
+      chat.style.display = '';
+    }
+  }
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -40,6 +53,9 @@ function App() {
               </div>
               <h1>Cat Room</h1>
             </div>
+            <button onClick={handleClick_2}>
+              Sidebar
+            </button>
             {user && (
               <div className="drop-down-container">
                 <div className="drop-down-button-container">

@@ -170,7 +170,7 @@ const Home = () => {
   const handleSliding = () => {
     const slidingBar = document.querySelector('.sliding-bar');
     const friends = document.querySelector('.friends>div');
-    const button = document.querySelector('.slide-button>button>img');
+    const button = document.querySelector('.slide-button>div>img');
     
     if (!slidingBar.style.width) {
       slidingBar.style.width = '200px';
@@ -284,50 +284,54 @@ const Home = () => {
   return (
     <div className="content home">
       <div className="sidebar">
-        <button onClick={showCats}>
-          <div>
-            <div>
+        <div className="button_container">
+          <button onClick={showCats} className='first_layer'>
+            <div className='second_layer'>
               <p>Search for Friends</p>
             </div>
-          </div>
-        </button>
-        <div className="search-for-friends">
-          {cats && cats.map(cat => {
-            return (
-              <button key={cat.key} user_key={cat.key} onClick={e => handleAddFriend(e)}>
-                <div className="user-item">
-                  <div className="user-item-inside">
-                    <div className="img-holder">
-                      <img src={cat.avatar} alt="" />
+            <div className="fading_line"></div>
+          </button>
+          <div className="search-for-friends">
+            {cats && cats.map(cat => {
+              return (
+                <button className='first_layer' key={cat.key} user_key={cat.key} onClick={e => handleAddFriend(e)}>
+                  <div className='second_layer'>
+                    <div className="user_div">
+                      <div>
+                        <img src={cat.avatar} alt="" />
+                      </div>
+                      <p>{cat.name}</p>
                     </div>
-                    <p>{cat.name}</p>
                   </div>
-                </div>
-              </button>
-            )
-          })}
+                  <div className="fading_line"></div>
+                </button>
+              )
+            })}
+          </div>
         </div>
-        <button>
-          <div>
-            <div>
+        <div className="button_container">
+          <button className='first_layer'>
+            <div className='second_layer'>
               <p>Options</p>
             </div>
-          </div>
-        </button>
-        <button>
-          <div>
-            <div>
+            <div className="fading_line"></div>
+          </button>
+        </div>
+        <div className="button_container">
+          <button className='first_layer'>
+            <div className='second_layer'>
               <p>Events</p>
             </div>
-          </div>
-        </button>
+            <div className="fading_line"></div>
+          </button>
+        </div>
       </div>
       <div className="chat-window-container">
         <div className="sliding-bar">
           <div className="slide-box">
-            <div className="slide-button">
-              <button onClick={handleSliding}><img src={triangle} alt="" /></button>
-            </div>
+            <button className="slide-button" onClick={handleSliding}>
+              <div><img src={triangle} alt="" /></div>
+            </button>
           </div>
           <div className="friends">
             <div>
