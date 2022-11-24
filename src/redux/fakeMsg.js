@@ -13,7 +13,7 @@ export const fakeMsgSlice = createSlice({
           'ok i\'ll meet you at the usual spot at midnight',
           'be there',
           'bounce',
-          'we already have the deal'
+          'i got ya\' dawg'
         ]
       },
       {

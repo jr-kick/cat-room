@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <div className="content login">
       <div className='greeting-text'>
-        <h1>Welcome to Cat Room!</h1>
+        <h1>Welcome to <br className="br" /> Cat Room!</h1>
         <p>Here you can talk about some very interesting topics, like milk, yarn balls, mice and many more. So don't be shy, come and join us! You can log in with Google right below this pharagraph.</p>
       </div>
       <div id="signInDiv">

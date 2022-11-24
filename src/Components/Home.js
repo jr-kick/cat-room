@@ -8,6 +8,7 @@ import send from '../Images/send.svg';
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import return_img from '../Images/return.svg';
+import { logout } from "../redux/user";
 
 
 
@@ -346,6 +347,14 @@ const Home = () => {
           <button className='first_layer'>
             <div className='second_layer'>
               <p>Events</p>
+            </div>
+            <div className="fading_line"></div>
+          </button>
+        </div>
+        <div className="button_container mobile">
+          <button className='first_layer' onClick={() => dispatch(logout())}>
+            <div className='second_layer'>
+              <p>Log out</p>
             </div>
             <div className="fading_line"></div>
           </button>

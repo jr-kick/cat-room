@@ -53,9 +53,9 @@ function App() {
               </div>
               <h1>Cat Room</h1>
             </div>
-            <button className="sidebar-button img-holder purple" onClick={handleClick_2}>
+            {user && <button className="sidebar-button img-holder purple" onClick={handleClick_2}>
               <img src={sidebar_img} alt="" />
-            </button>
+            </button>}
             {user && (
               <div className="drop-down-container">
                 <div className="drop-down-button-container">
