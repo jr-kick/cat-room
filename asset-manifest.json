@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/cat-room/static/css/main.a23712de.css",
+    "main.js": "/cat-room/static/js/main.8f0a02ce.js",
+    "static/js/787.3b9a3974.chunk.js": "/cat-room/static/js/787.3b9a3974.chunk.js",
+    "static/media/paw.png": "/cat-room/static/media/paw.9a1ea1b7c1cb55705118.png",
+    "static/media/prr.jpg": "/cat-room/static/media/prr.7cabd87fb0af9114677d.jpg",
+    "static/media/Assistant-VariableFont_wght.ttf": "/cat-room/static/media/Assistant-VariableFont_wght.b75601d31d2637c2010a.ttf",
+    "static/media/FredokaOne-Regular.ttf": "/cat-room/static/media/FredokaOne-Regular.4aea26dd6637dfac0fac.ttf",
+    "static/media/Puss.jpg": "/cat-room/static/media/Puss.31b6400099d79986f5b8.jpg",
+    "static/media/Mr. Jinks.jpg": "/cat-room/static/media/Mr. Jinks.6956f8eeccfcedab1d88.jpg",
+    "static/media/triangle.png": "/cat-room/static/media/triangle.dd2fef5bc835211e1776.png",
+    "static/media/like.svg": "/cat-room/static/media/like.49e1ee2ce93710cd4cf725e51b74d491.svg",
+    "static/media/return.svg": "/cat-room/static/media/return.fb0d9a363015b6fe9942f9e4648e024e.svg",
+    "index.html": "/cat-room/index.html",
+    "static/media/send.svg": "/cat-room/static/media/send.dd0f549746af423830326d972dce3d7f.svg",
+    "main.a23712de.css.map": "/cat-room/static/css/main.a23712de.css.map",
+    "main.8f0a02ce.js.map": "/cat-room/static/js/main.8f0a02ce.js.map",
+    "787.3b9a3974.chunk.js.map": "/cat-room/static/js/787.3b9a3974.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a23712de.css",
+    "static/js/main.8f0a02ce.js"
+  ]
+}
