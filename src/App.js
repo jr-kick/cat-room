@@ -6,6 +6,7 @@ import catImg from './Images/paw.png';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "./redux/user";
+import sidebar_img from './Images/sidebar.png'
 
 function App() {
   const user = useSelector((state) => state.user.value);
@@ -53,8 +54,8 @@ function App() {
               </div>
               <h1>Cat Room</h1>
             </div>
-            <button onClick={handleClick_2}>
-              Sidebar
+            <button className="sidebar-button img-holder purple" onClick={handleClick_2}>
+              <img src={sidebar_img} alt="" />
             </button>
             {user && (
               <div className="drop-down-container">

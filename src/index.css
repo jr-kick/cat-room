@@ -12,6 +12,37 @@
 
 @media (max-width: 610px) {
 
+  .sidebar-button {
+    width: 40px;
+  }
+
+  .friends>div>p {
+    padding-left: 10px;
+    border-bottom: 2px solid rgb(22, 22, 22);
+  }
+
+  .current-friend {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgb(22, 22, 22);
+  }
+
+  .current-friend>div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+    align-items: center;
+  }
+
+  .sliding-bar-mobile {
+    width: 100%;
+    height: 85vh;
+  }
+
+  .sliding-bar {
+    display: none;
+  }
   .drop-down-container {
     display: none;
   }
@@ -20,9 +51,6 @@
     width: 100%;
     background-color: rgb(16, 16, 16);
     height: 15vh;
-  }
-  .sliding-bar {
-    display: none;
   }
 
   .button_container {
@@ -59,20 +87,6 @@
     display: none;
   }
 
-  .user_div {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .user_div>div {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
   .sidebar p {
     font-size: 25px;
   }
@@ -100,7 +114,7 @@
   }
 
   .chat-window {
-    display: grid;
+    display: none;
     grid-template-rows: 42px auto max-content;
     width: 100%;
     height: 85vh;
@@ -112,9 +126,37 @@
   .title>h1 {
     display: none;
   }
+
+  .slide-box {
+    display: none;
+  }
+
+  .friends>div {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 611px) and (max-width: 1049px) {
+
+  .return-button {
+    display: none;
+  }
+
+  .current-friend>div {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgb(22, 22, 22);
+    height: 42px;
+  }
+
+  .sidebar-button {
+    display: none;
+  }
+
+  .sliding-bar-mobile {
+    display: none;
+  }
 
   .header {
     width: 100%;
@@ -152,20 +194,6 @@
 
   .fading_line {
     display: none;
-  }
-
-  .user_div {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .user_div>div {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
   }
 
   .sidebar p {
@@ -209,9 +237,51 @@
   .title>h1 {
     display: block;
   }
+
+  .sliding-bar {
+    width: 40px;
+    height: 70vh;
+    grid-column: 1 / 2;
+    background-color: rgb(8, 8, 8);
+    border-radius: 30px 0px 0px 30px;
+    border-right: 2px solid rgb(22, 22, 22);
+    outline: 2px solid rgb(206, 0, 229);
+    overflow: hidden;
+    align-self: center;
+    justify-self: flex-end;
+    transition: width 0.5s;
+  }
+
+  .friends>div {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
 }
 
 @media (min-width: 1050px) {
+
+  .return-button {
+    display: none;
+  }
+
+  .current-friend>div {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgb(22, 22, 22);
+    height: 42px;
+  }
+
+  .sidebar-button {
+    display: none;
+  }
+
+  .sliding-bar-mobile {
+    display: none;
+  }
+
   .button_container {
     width: 100%;
   }
@@ -254,20 +324,6 @@
     opacity: 0;
   }
 
-  .user_div {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .user_div>div {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
   .sidebar p {
     font-size: 25px;
   }
@@ -303,7 +359,26 @@
     align-self: center;
     overflow: hidden;
   }
+
+  .sliding-bar {
+    width: 40px;
+    height: 70vh;
+    grid-column: 1 / 2;
+    background-color: rgb(8, 8, 8);
+    border-radius: 30px 0px 0px 30px;
+    border-right: 2px solid rgb(22, 22, 22);
+    outline: 2px solid rgb(206, 0, 229);
+    overflow: hidden;
+    align-self: center;
+    justify-self: flex-end;
+    transition: width 0.5s;
+  }
   
+}
+
+button {
+  background: none;
+  border: none;
 }
 
 * {
@@ -410,28 +485,6 @@ a {
 
 /* Home Component */
 
-.friends .img-holder {
-  width: 35px;
-  height: 35px;
-}
-
-.friends .user-item {
-  padding: 5px 10px;
-  width: 100%;
-  border-bottom: 2px solid rgb(22, 22, 22);
-}
-
-.friends .user-item:hover {
-  background-color: rgb(22, 22, 22);
-}
-
-.friends .user-item-inside {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .drop-down-container {
   width: 150px;
 }
@@ -499,33 +552,6 @@ a {
   justify-content: space-between;
 }
 
-.sliding-bar {
-  width: 40px;
-  height: 70vh;
-  grid-column: 1 / 2;
-  background-color: rgb(8, 8, 8);
-  border-radius: 30px 0px 0px 30px;
-  border-right: 2px solid rgb(22, 22, 22);
-  outline: 2px solid rgb(206, 0, 229);
-  overflow: hidden;
-  align-self: center;
-  justify-self: flex-end;
-  transition: width 0.5s;
-}
-
-.friends>div {
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-.friends button:hover {
-  cursor: pointer;
-  background-color: rgb(22, 22, 22);
-}
-
 .slide-box {
   height: 42px;
   border-bottom: 2px solid rgb(22, 22, 22);
@@ -553,32 +579,6 @@ a {
 
 .slide-button>div>img {
   transition: all 0.5s;
-}
-
-.current-friend {
-  height: 42px;
-  border-bottom: 2px solid rgb(22, 22, 22);
-  grid-row: 1 / 2;
-}
-
-.current-friend>div {
-  height: 100%;
-  display: flex;
-  padding-left: 10px;
-  align-items: center;
-  gap: 10px;
-}
-
-.current-friend>div>div {
-  height: 30px;
-  width: 30px;
-  display: flex;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.current-friend img {
-  width: 100%;
 }
 
 .message-out {
@@ -698,18 +698,49 @@ a {
   transition: height 0.5s;
 }
 
-.img-holder {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
+.plus {
+  font-size: 1.4rem;
 }
 
-.img-holder>img {
+.user_div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.img-holder {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.chat-window-container .img-holder {
+  width: 30px;
+  height: 30px;
+}
+
+.sidebar .img-holder {
+  width: 50px;
+  height: 50px;
+}
+
+img {
   width: 100%;
 }
 
-.plus {
-  font-size: 1.4rem;
+.friends .user_div {
+  width: 100%;
+  height: 100%;
+}
+
+.friends .user_div:hover {
+  background-color: rgb(22, 22, 22);
+}
+
+.friends>div>div {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-bottom: 2px solid rgb(22, 22, 22);
+  width: 100%;
 }

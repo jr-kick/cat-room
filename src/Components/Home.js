@@ -7,6 +7,7 @@ import like from '../Images/like.svg';
 import send from '../Images/send.svg';
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import return_img from '../Images/return.svg';
 
 
 
@@ -281,6 +282,26 @@ const Home = () => {
     }
   };
 
+  const handleMobile = () => {
+    const div = document.querySelector('.sliding-bar-mobile');
+    const chat = document.querySelector('.chat-window');
+
+    if (div.style.display == '') {
+      div.style.display = 'none';
+      chat.style.display = 'grid';
+    }
+  };
+
+  const handleMobileBack = () => {
+    const div = document.querySelector('.sliding-bar-mobile');
+    const chat = document.querySelector('.chat-window');
+
+    if (div.style.display == 'none') {
+      div.style.display = '';
+      chat.style.display = '';
+    }
+  };
+
   return (
     <div className="content home">
       <div className="sidebar">
@@ -297,7 +318,7 @@ const Home = () => {
                 <button className='first_layer' key={cat.key} user_key={cat.key} onClick={e => handleAddFriend(e)}>
                   <div className='second_layer'>
                     <div className="user_div">
-                      <div>
+                      <div className="img-holder">
                         <img src={cat.avatar} alt="" />
                       </div>
                       <p>{cat.name}</p>
@@ -343,8 +364,38 @@ const Home = () => {
                   return cat.key == friend;
                 });
                 return (
-                  <div className="user-item" key={chat.chat_id}>
-                    <Link className="user-item-inside" to={`/chats/${chat.chat_id}`}>
+                  <div key={chat.chat_id}>
+                    <Link className="user_div" to={`/chats/${chat.chat_id}`}>
+                      <div className="img-holder">
+                        <img src={friend.avatar} alt="" />
+                      </div>
+                      <p>{friend.name}</p>
+                    </Link>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+        <div className="sliding-bar-mobile">
+          <div className="slide-box">
+            <button className="slide-button" onClick={handleSliding}>
+              <div><img src={triangle} alt="" /></div>
+            </button>
+          </div>
+          <div className="friends">
+            <div>
+              <p>Friends List</p>
+              {chats && chats.map(chat => {
+                let friend = chat.members.find(member => {
+                  return member != this_user_key;
+                });
+                friend = cats.find(cat => {
+                  return cat.key == friend;
+                });
+                return (
+                  <div key={chat.chat_id}>
+                    <Link className="user_div" onClick={handleMobile} to={`/chats/${chat.chat_id}`}>
                       <div className="img-holder">
                         <img src={friend.avatar} alt="" />
                       </div>
@@ -360,10 +411,13 @@ const Home = () => {
           <div className="current-friend">
             {friend && (
               <div>
-                <div>
-                  <img src={friend.avatar} alt="" />
+                <div className="user_div">
+                  <div className="img-holder">
+                    <img src={friend.avatar} alt="" />
+                  </div>
+                  <p>{friend.name}</p>
                 </div>
-                <p>{friend.name}</p>
+                <button className='return-button img-holder purple' onClick={handleMobileBack}><img src={return_img} alt="" /></button>
               </div>
             )}
           </div>
