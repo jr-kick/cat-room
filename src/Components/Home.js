@@ -257,13 +257,17 @@ const Home = () => {
     }
   };
 
-  const handleInput = (e) => {
-    const textContainer = document.querySelector('.message-in');
+  const handleEnter = (e) => {
 
     if (e.code === 'Enter') {
       e.preventDefault();
       handleSend();
     };
+
+  };
+
+  const handleInput = (e) => {
+    const textContainer = document.querySelector('.message-in');
 
     if (!e.target.value) {
       setSendButton(like);
@@ -459,7 +463,7 @@ const Home = () => {
           </div>
           <div className="message-in">
             <div className="message-text-container">
-              <textarea onInput={handleInput}></textarea>
+              <textarea onInput={handleInput} onKeyDown={handleEnter}></textarea>
             </div>
             <div className="message-button-container">
               <button onMouseDown={handleSend}><img className="purple" src={sendButton} alt=""/></button>
