@@ -44,7 +44,6 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
       <div className="App">
         <header className="header">
           <div>
@@ -75,13 +74,14 @@ function App() {
             )}
           </div>
         </header>
-        <Routes>
-          <Route exact path='/' element={user != null ? <Navigate to='/chats/0' /> : <Navigate to='/login' />} />
-          <Route exact path='/login' element={user != null ? <Navigate to='/chats/0' /> : <Login />} />
-          <Route path='/chats/:id' element={user == null ? <Navigate to='/login' /> : <Home />} />
-        </Routes>
+        <BrowserRouter basename="/cat-room">
+            <Routes>
+              <Route exact path='/' element={user != null ? <Navigate to='/chats/0' /> : <Navigate to='/login' />} />
+              <Route exact path='/login' element={user != null ? <Navigate to='/chats/0' /> : <Login />} />
+              <Route path='/chats/:id' element={user == null ? <Navigate to='/login' /> : <Home />} />
+            </Routes>
+        </BrowserRouter>
       </div>
-    </BrowserRouter>
   );
 }
 
