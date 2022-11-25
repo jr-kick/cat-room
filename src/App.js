@@ -83,7 +83,7 @@ function App() {
             )}
           </div>
         </header>
-        <BrowserRouter basename="/cat-room">
+        <BrowserRouter basename="/cat-room/">
             <Routes>
               <Route exact path='/' element={recieved == true ? <Navigate to='/chats/0' /> : <Login />} />
               <Route path='/chats/:id' element={user == null ? <Navigate to='/' /> : <Home />} />
