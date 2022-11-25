@@ -62,7 +62,7 @@ function App() {
               </div>
               <h1>Cat Room</h1>
             </div>
-            {user && <button className="sidebar-button img-holder purple" onClick={handleClick_2}>
+            {user && currentpath != '/cat-room/' && <button className="sidebar-button img-holder purple" onClick={handleClick_2}>
               <img src={sidebar_img} alt="" />
             </button>}
             {user && currentpath != '/cat-room/' && (
