@@ -6,6 +6,7 @@ import { setCurrentPath } from "../redux/currentpath";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const google = window.google;
 
   function handleCallbackResponse(response) {
     var user = jwtDecode(response.credential);
