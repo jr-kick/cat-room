@@ -65,7 +65,7 @@ function App() {
             {user && <button className="sidebar-button img-holder purple" onClick={handleClick_2}>
               <img src={sidebar_img} alt="" />
             </button>}
-            {user && currentpath != '/cat-room' && (
+            {user && currentpath != '/cat-room/' && (
               <div className="drop-down-container">
                 <div className="drop-down-button-container">
                   <button className="user drop-down-button" onClick={handleClick}>
@@ -83,7 +83,7 @@ function App() {
             )}
           </div>
         </header>
-        <BrowserRouter basename="/cat-room">
+        <BrowserRouter basename="/cat-room/">
             <Routes>
               <Route exact path='/' element={recieved == true ? <Navigate to='/chats/0' /> : <Login />} />
               <Route path='/chats/:id' element={user == null ? <Navigate to='/' /> : <Home />} />
