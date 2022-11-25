@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/user";
+import { setCurrentPath } from "../redux/currentpath";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,10 @@ const Login = () => {
     var user = jwtDecode(response.credential);
     dispatch(login({ name: user.name, avatar: user.picture }));
   };
+
+  useEffect(() => {
+    dispatch(setCurrentPath(window.location.pathname));
+  }, []);
 
   useEffect(() => {
     /* global google */

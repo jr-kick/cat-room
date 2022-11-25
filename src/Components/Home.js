@@ -9,9 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import return_img from '../Images/return.svg';
 import { logout } from "../redux/user";
-
-
-
+import { setRecieved } from "../redux/recieved";
+import { setCurrentPath } from "../redux/currentpath";
 
 const Home = () => {
   const [dialogRan, setDialogRan] = useState([0, 0, 0]);
@@ -33,6 +32,11 @@ const Home = () => {
   let friends = useSelector(state => state.friends.value);
 
   let fakeMsg = useSelector(state => state.fakeMsg.value);
+
+  useEffect(() => {
+      dispatch(setRecieved(false));
+      dispatch(setCurrentPath(window.location.pathname));
+  }, []);
 
   useEffect(() => {
     if (id == false) {
